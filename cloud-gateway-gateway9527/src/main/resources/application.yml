@@ -13,6 +13,8 @@ spring:
         - id: payment_routh #路由的ID，没有固定规则但要求唯一，建议配合服务名
 #          uri: http://localhost:8001   #匹配后提供服务的路由地址
           uri: lb://CLOUD-PAYMENT-SERVICE   #匹配后提供服务的路由地址
+#          fiters:
+#            - AddRequestParameter=X-Request-Id,1024
           predicates:
             - Path=/payment/get/**   #断言,路径相匹配的进行路由
 
@@ -21,6 +23,12 @@ spring:
           uri: lb://CLOUD-PAYMENT-SERVICE   #匹配后提供服务的路由地址
           predicates:
             - Path=/payment/lb/**   #断言,路径相匹配的进行路由
+#            - After=2020-04-04T17:02:43.861+08:00[Asia/Shanghai]
+#            - Cookie=username,zhangshan    #并且Cookie是username=zhangshan才能访问
+#            - Header=X-Request-Id, \d+   #请求头中要有X-Request-Id属性并且值为整数的正则表达式
+#            - Host=**.atguigu.com
+#            - Method=GET
+#            - Query=username, \d+ #要有参数名称并且是正整数才能路由
 
         - id: payment_routh3 #路由的ID，没有固定规则但要求唯一，建议配合服务名
           uri: http://news.baidu.com/mil   #匹配后提供服务的路由地址
